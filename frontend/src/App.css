@@ -1,0 +1,261 @@
+/* frontend/src/App.css */
+
+/* --- Global Styles & Layout --- */
+:root {
+  --primary-color: #005f73;
+  --secondary-color: #0a9396;
+  --background-color: #f4f4f9;
+  --card-background: #ffffff;
+  --text-color: #333;
+  --border-color: #e0e0e0;
+  --error-color: #d9534f;
+  --rating-color: #ee9b00;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display:flex;
+  justify-content:center;
+  align-items: center;
+}
+
+
+
+.App {
+  max-width: 1000px;
+  width:100%;
+  /* margin: 0 auto; */
+  padding: 20px;
+  text-align : center;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+/* --- Tabs --- */
+.tabs {
+  display: flex;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+.tabs button {
+  padding: 1rem 1.5rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  transition: all 0.2s ease-in-out;
+  border-bottom: 3px solid transparent;
+}
+
+.tabs button.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.tabs button:hover {
+  color : white;
+  background-color: #e9ecef;
+}
+
+/* --- Uploader --- */
+.uploader-container {
+  background: var(--card-background);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.uploader-container input[type="file"] {
+  margin: 1.5rem 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--primary-color);
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* --- Details View --- */
+.details-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.detail-section {
+  background: var(--card-background);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  list-style-type : none;
+}
+
+.detail-section h4 {
+  margin-top: 0;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.soft-skills{
+  
+  justify-content:center;
+}
+
+.rating-card {
+  text-align: center;
+  /* Removed the linear gradient for a cleaner look */
+  background: var(--card-background); /* Use the same background as other cards */
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Keep consistent shadow */
+  border: 1px solid var(--border-color); /* Add a subtle border */
+  display: flex; /* Use flexbox for vertical centering */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rating-card h4 {
+  margin-top: 0;
+  border-bottom: none; /* Remove border from heading in rating card */
+  padding-bottom: 0;
+  color: var(--primary-color); /* Use primary color for consistency */
+  font-size: 1.2rem; /* Slightly smaller heading */
+}
+
+.rating-card .rating-score {
+  font-size: 2.5rem; /* Reduced font size for better proportionality */
+  font-weight: bold;
+  margin: 0.5rem 0 0 0; /* Adjusted margin */
+  color: var(--secondary-color); /* A more subtle accent color, matching secondary */
+  /* You could also use a slightly darker version of the text color if you prefer: */
+  /* color: #555; */
+}
+
+
+.experience-item {
+  margin-bottom: 1rem;
+}
+.experience-item ul {
+  padding-left: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Table View --- */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-background);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+th {
+  background-color: #f8f9fa;
+}
+
+/* --- Modal --- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background-color: var(--background-color);
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #f1f5f9; /* Lighter background for a modern look */
+  color: #64748b; /* Softer text color */
+  border: 1px solid #e2e8f0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  
+  /* --- The Fix --- */
+  width: 32px; /* Set an explicit width */
+  height: 32px; /* Set an explicit height (equal to width) */
+  border-radius: 50%; /* This makes it a circle */
+  padding: 0; /* Remove padding to avoid distortion */
+  line-height: 1; /* Critical for vertical centering */
+
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  z-index: 1001;
+}
+
+.close-modal:hover {
+  background-color: #e2e8f0; /* Darker background on hover */
+  color: #1e293b; /* Darker text on hover */
+  transform: scale(1.1);
+}

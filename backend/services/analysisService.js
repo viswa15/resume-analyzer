@@ -3,10 +3,12 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const pdf = require('pdf-parse');
 require('dotenv').config();
+const { buildModelChain, generateWithRetry } = require('../utils/geminiClient');
+const logger = require('../utils/logger');
 
 // Initialize the Google Gemini AI client
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+const modelChain = buildModelChain(genAI, { responseMimeType: 'application/json', maxOutputTokens: 8192 });
 
 /**
  * Parses a PDF file buffer and extracts its text content.
@@ -58,19 +60,20 @@ const analyzeResumeWithAI = async (resumeText) => {
     }
   `;
 
-  const result = await model.generateContent(prompt);
-  const response = await result.response;
-  const text = response.text();
+  const text = await generateWithRetry(modelChain, prompt);
 
   // Sometimes, the model might still wrap the JSON in markdown backticks.
   // This cleanup step ensures we get a clean JSON string.
   const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
-  
+
   try {
     return JSON.parse(cleanedText);
   } catch (error) {
-    console.error("Failed to parse JSON from LLM response:", cleanedText);
-    throw new Error("Could not parse AI response into valid JSON.");
+    logger.error('Failed to parse JSON from AI resume analysis response', {
+      rawResponsePreview: cleanedText.slice(0, 2000),
+      rawResponseLength: cleanedText.length,
+    });
+    throw new Error('Could not parse AI response into valid JSON.');
   }
 };
 

@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { HistoryPage } from "../components/resume-app";
+export const Route = createFileRoute("/history")({ head: () => ({ meta: [{ title: "History — DeepKlarity Resume Analyzer" }, { name: "description", content: "Search and revisit your analyzed resume dossiers." }, { property: "og:title", content: "History — DeepKlarity Resume Analyzer" }, { property: "og:description", content: "Search and revisit your analyzed resume dossiers." }] }), component: HistoryPage });

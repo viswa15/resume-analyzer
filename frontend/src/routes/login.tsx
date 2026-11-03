@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { AuthPage } from "../components/resume-app";
+export const Route = createFileRoute("/login")({ head: () => ({ meta: [{ title: "Sign in — DeepKlarity Resume Analyzer" }, { name: "description", content: "Sign in to your DeepKlarity resume analysis workspace." }, { property: "og:title", content: "Sign in — DeepKlarity Resume Analyzer" }, { property: "og:description", content: "Sign in to your DeepKlarity resume analysis workspace." }] }), component: () => <AuthPage mode="login" /> });

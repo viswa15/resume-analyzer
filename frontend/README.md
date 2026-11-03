@@ -1,12 +1,29 @@
-# React + Vite
+# DeepKlarity Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The TanStack Start (React 19, Tailwind 4, shadcn/ui) frontend for DeepKlarity: resume analysis,
+JD matching, chat, bullet rewrites, job search, an application tracker and learning roadmaps.
+It talks to the Express/PostgreSQL API in `../backend`.
 
-Currently, two official plugins are available:
+## Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm install
+cp .env.example .env   # set VITE_API_BASE_URL if the backend isn't on localhost:3001
+npm run dev
+```
 
-## Expanding the ESLint configuration
+Opens on http://localhost:8080. The backend must be running separately (see the repo root
+`README.md`).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Scripts
+
+- `npm run dev` - local dev server
+- `npm run build` - production build (SSR server in `.output/`)
+- `npm run typecheck` - TypeScript check
+- `npm run lint` / `npm run format` - eslint / prettier
+
+## Deploying
+
+Deployed on Vercel with root directory `frontend`. Set `VITE_API_BASE_URL` (the Render backend
+URL) and `DEPLOY_TARGET=vercel` in the Vercel project's environment variables. See the repo root
+`README.md` for the full deployment steps.

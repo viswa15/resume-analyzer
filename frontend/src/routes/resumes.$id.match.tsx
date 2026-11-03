@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { MatchPage } from "../components/resume-app";
+export const Route = createFileRoute("/resumes/$id/match")({ head: () => ({ meta: [{ title: "JD match — DeepKlarity" }, { name: "description", content: "Compare your resume with a job description." }, { property: "og:title", content: "JD match — DeepKlarity" }, { property: "og:description", content: "Compare your resume with a job description." }] }), component: MatchPage });

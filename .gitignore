@@ -1,2 +1,8 @@
 node_modules
 .env
+*.log
+logs/
+dist/
+.output/
+.vercel/
+.DS_Store

@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ChatPage } from "../components/chat-page";
+export const Route = createFileRoute("/resumes/$id/chat")({ head: () => ({ meta: [{ title: "Resume assistant — DeepKlarity" }, { name: "description", content: "Chat with an assistant grounded in your resume." }, { property: "og:title", content: "Resume assistant — DeepKlarity" }, { property: "og:description", content: "Chat with an assistant grounded in your resume." }] }), component: ChatPage });

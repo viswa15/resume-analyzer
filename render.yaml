@@ -14,7 +14,6 @@ services:
     name: resume-analyzer-backend
     runtime: node
     plan: free
-    branch: release/v2
     rootDir: backend
     buildCommand: npm install
     startCommand: npm run migrate && npm start

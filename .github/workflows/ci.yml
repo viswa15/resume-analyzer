@@ -39,3 +39,5 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run build
+        env:
+          VITE_API_BASE_URL: https://ci-placeholder.example.com

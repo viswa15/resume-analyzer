@@ -139,7 +139,11 @@ export type TailoredDocument = {
 export type TailorSide = { atsScore: number; keywordPercent: number | null; missingKeywords: string[] };
 export type TailorResult = { document: TailoredDocument; comparison: { before: TailorSide; after: TailorSide } };
 
-const API_BASE_URL = (import.meta.env["VITE_API_BASE_URL"] || "http://localhost:3001").replace(/\/$/, "");
+// Baked in at build time; vite.config.ts fails a production build without it,
+// so the localhost fallback only ever applies in local dev.
+const API_BASE_URL = (
+  import.meta.env["VITE_API_BASE_URL"] || (import.meta.env.DEV ? "http://localhost:3001" : "")
+).replace(/\/$/, "");
 
 export class ApiError extends Error {
   status: number;

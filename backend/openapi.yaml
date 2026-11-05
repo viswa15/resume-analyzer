@@ -129,6 +129,17 @@ paths:
       responses:
         '200': { description: Resume details }
         '404': { description: Not found / not owned by this user }
+    delete:
+      summary: Delete a resume and everything attached to it
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer }
+      responses:
+        '204': { description: Deleted }
+        '404': { description: Not found / not owned by this user }
   /resumes/{id}/match:
     post:
       summary: Score a resume against a pasted job description (ATS-style)
@@ -215,6 +226,40 @@ paths:
       responses:
         '200': { description: "Ranked job postings with a per-job skill-overlap score" }
         '404': { description: Not found / not owned by this user }
+        '503': { description: Job search is not configured (missing Adzuna credentials) }
+  /jobs/search:
+    get:
+      summary: Search live job postings, optionally ranked against one of your resumes
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: what
+          schema: { type: string }
+          description: Search keywords.
+        - in: query
+          name: where
+          schema: { type: string }
+          description: Location filter.
+        - in: query
+          name: maxDaysOld
+          schema: { type: integer, minimum: 1 }
+        - in: query
+          name: salaryMin
+          schema: { type: integer, minimum: 1 }
+        - in: query
+          name: salaryMax
+          schema: { type: integer, minimum: 1 }
+        - in: query
+          name: employmentType
+          schema: { type: string, enum: [full_time, part_time, contract, permanent] }
+        - in: query
+          name: resumeId
+          schema: { type: integer }
+          description: >
+            One of your resumes to rank results against. An unknown or foreign id
+            falls back to an unranked search.
+      responses:
+        '200': { description: "Job postings: { data, candidateExperienceYears, matchedResumeId }" }
         '503': { description: Job search is not configured (missing Adzuna credentials) }
   /resumes/{id}/cover-letter:
     post:
